@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tyttökalenteri.fi</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+</head>
+<body class="bg-gray-100 text-gray-800" x-data="{ openA: false, openB: false, openC: false, openD: false }">
+
+  <!-- Header -->
+  <header class="bg-white shadow">
+    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+      <h1 class="text-3xl font-bold">Tyttökalenteri.fi</h1>
+      <p class="mt-1 text-gray-600">Tilaa yrityksellesi oma logolla varustettu vuosikalenteri!</p>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="max-w-7xl mx-auto py-10 px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+
+      <!-- Kalenteri A -->
+      <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+        <div class="p-4">
+          <h2 class="text-xl font-semibold mb-4">Kalenteri A</h2>
+          <div class="flex space-x-2 overflow-x-auto mb-4">
+            <img src="images/kalenteri-a-cover.jpg" alt="Kalenteri A kansikuva" class="w-1/3 rounded">
+            <img src="images/kalenteri-a-page.jpg" alt="Kalenteri A sivunäkymä" class="w-1/3 rounded">
+            <img src="images/kalenteri-a-mockup.jpg" alt="Kalenteri A mockup" class="w-1/3 rounded">
+          </div>
+          <button @click="openA = true" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 rounded">
+            Tilaa Kalenteri A
+          </button>
+        </div>
+      </div>
+
+      <!-- Kalenteri B -->
+      <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+        <div class="p-4">
+          <h2 class="text-xl font-semibold mb-4">Kalenteri B</h2>
+          <div class="flex space-x-2 overflow-x-auto mb-4">
+            <img src="images/kalenteri-b-cover.jpg" alt="Kalenteri B kansikuva" class="w-1/3 rounded">
+            <img src="images/kalenteri-b-page.jpg" alt="Kalenteri B sivunäkymä" class="w-1/3 rounded">
+            <img src="images/kalenteri-b-mockup.jpg" alt="Kalenteri B mockup" class="w-1/3 rounded">
+          </div>
+          <button @click="openB = true" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 rounded">
+            Tilaa Kalenteri B
+          </button>
+        </div>
+      </div>
+
+      <!-- Kalenteri C -->
+      <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+        <div class="p-4">
+          <h2 class="text-xl font-semibold mb-4">Kalenteri C</h2>
+          <div class="flex space-x-2 overflow-x-auto mb-4">
+            <img src="images/kalenteri-c-cover.jpg" alt="Kalenteri C kansikuva" class="w-1/3 rounded">
+            <img src="images/kalenteri-c-page.jpg" alt="Kalenteri C sivunäkymä" class="w-1/3 rounded">
+            <img src="images/kalenteri-c-mockup.jpg" alt="Kalenteri C mockup" class="w-1/3 rounded">
+          </div>
+          <button @click="openC = true" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 rounded">
+            Tilaa Kalenteri C
+          </button>
+        </div>
+      </div>
+
+      <!-- Kalenteri D -->
+      <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+        <div class="p-4">
+          <h2 class="text-xl font-semibold mb-4">Kalenteri D</h2>
+          <div class="flex space-x-2 overflow-x-auto mb-4">
+            <img src="images/kalenteri-d-cover.jpg" alt="Kalenteri D kansikuva" class="w-1/3 rounded">
+            <img src="images/kalenteri-d-page.jpg" alt="Kalenteri D sivunäkymä" class="w-1/3 rounded">
+            <img src="images/kalenteri-d-mockup.jpg" alt="Kalenteri D mockup" class="w-1/3 rounded">
+          </div>
+          <button @click="openD = true" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 rounded">
+            Tilaa Kalenteri D
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Modals -->
+  <!-- Modal A -->
+  <div x-show="openA" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center px-4" x-cloak>
+    <div class="bg-white rounded-lg shadow-lg max-w-md w-full p-6">
+      <h3 class="text-2xl font-bold mb-4">Tilaa Kalenteri A</h3>
+      <form id="formA" onsubmit="submitForm('A'); return false;" class="space-y-4">
+        <input type="hidden" name="calendar" value="A">
+        <div>
+          <label class="block text-sm font-medium mb-1">Yrityksen nimi</label>
+          <input type="text" name="companyName" required class="w-full border rounded px-3 py-2">
+        </div>
+        <div>
+          <label class="block text-sm font-medium mb-1">Sähköposti</label>
+          <input type="email" name="email" required class="w-full border rounded px-3 py-2">
+        </div>
+        <div>
+          <label class="block text-sm font-medium mb-1">Logo (PNG/JPG)</label>
+          <input type="file" name="logo" accept="image/png, image/jpeg" required class="w-full">
+        </div>
+        <div class="flex justify-end space-x-2">
+          <button type="button" @click="openA = false" class="px-4 py-2 rounded border">Peruuta</button>
+          <button type="submit" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded">Lähetä</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal B -->
+  <div x-show="openB" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center px-4" x-cloak>
+    <div class="bg-white rounded-lg shadow-lg max-w-md w-full p-6">
+      <h3 class="text-2xl font-bold mb-4">Tilaa Kalenteri B</h3>
+      <form id="formB" onsubmit="submitForm('B'); return false;" class="space-y-4">
+        <input type="hidden" name="calendar" value="B">
+        <div>
+          <label class="block text-sm font-medium mb-1">Yrityksen nimi</label>
+          <input type="text" name="companyName" required class="w-full border rounded px-3 py-2">
+        </div>
+        <div>
+          <label class="block text-sm font-medium mb-1">Sähköposti</label>
+          <input type="email" name="email" required class="w-full border rounded px-3 py-2">
+        </div>
+        <div>
+          <label class="block text-sm font-medium mb-1">Logo (PNG/JPG)</label>
+          <input type="file" name="logo" accept="image/png, image/jpeg" required class="w-full">
+        </div>
+        <div class="flex justify-end space-x-2">
+          <button type="button" @click="openB = false" class="px-4 py-2 rounded border">Peruuta</button>
+          <button type="submit" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded">Lähetä</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal C -->
+  <div x-show="openC" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center px-4" x-cloak>
+    <div class="bg-white rounded-lg shadow-lg max-w-md w-full p-6">
+      <h3 class="text-2xl font-bold mb-4">Tilaa Kalenteri C</h3>
+      <form id="formC" onsubmit="submitForm('C'); return false;" class="space-y-4">
+        <input type="hidden" name="calendar" value="C">
+        <div>
+          <label class="block text-sm font-medium mb-1">Yrityksen nimi</label>
+          <input type="text" name="companyName" required class="w-full border rounded px-3 py-2">
+        </div>
+        <div>
+          <label class="block text-sm font-medium mb-1">Sähköposti</label>
+          <input type="email" name="email" required class="w-full border rounded px-3 py-2">
+        </div>
+        <div>
+          <label class="block text-sm font-medium mb-1">Logo (PNG/JPG)</label>
+          <input type="file" name="logo" accept="image/png, image/jpeg" required class="w-full">
+        </div>
+        <div class="flex justify-end space-x-2">
+          <button type="button" @click="openC = false" class="px-4 py-2 rounded border">Peruuta</button>
+          <button type="submit" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded">Lähetä</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal D -->
+  <div x-show="openD" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center px-4" x-cloak>
+    <div class="bg-white rounded-lg shadow-lg max-w-md w-full p-6">
+      <h3 class="text-2xl font-bold mb-4">Tilaa Kalenteri D</h3>
+      <form id="formD" onsubmit="submitForm('D'); return false();" class="space-y-4">
+        <input type="hidden" name="calendar" value="D">
+        <div>
+          <label class="block text-sm font-medium mb-1">Yrityksen nimi</label>
+          <input type="text" name="companyName" required class="w-full border rounded px-3 py-2">
+        </div>
+        <div>
+          <label class="block text-sm font-medium mb-1">Sähköposti</label>
+          <input type="email" name="email" required class="w-full border rounded px-3 py-2">
+        </div>
+        <div>
+          <label class="block text-sm font-medium mb-1">Logo (PNG/JPG)</label>
+          <input type="file" name="logo" accept="image/png, image/jpeg" required class="w-full">
+        </div>
+        <div class="flex justify-end space-x-2">
+          <button type="button" @click="openD = false" class="px-4 py-2 rounded border">Peruuta</button>
+          <button type="submit" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded">Lähetä</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Submission Script -->
+  <script>
+    function submitForm(calendar) {
+      const form = document.getElementById('form' + calendar);
+      const data = new FormData(form);
+      fetch('https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec', {
+        method: 'POST',
+        body: data
+      })
+      .then(response => {
+        if (!response.ok) throw new Error('Verkkovirhe');
+        alert('Kiitos! Pyyntösi on lähetetty.');
+        // Sulje modal
+        document.querySelector('[x-data]').__x.$data['open' + calendar] = false;
+        form.reset();
+      })
+      .catch(error => {
+        console.error(error);
+        alert('Virhe lähetettäessä lomaketta. Yritä uudelleen.');
+      });
+    }
+  </script>
+</body>
+</html>
